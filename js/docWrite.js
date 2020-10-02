@@ -1,0 +1,1 @@
+document.write("<h1>Escribiendo a lo LOCO</h1>");

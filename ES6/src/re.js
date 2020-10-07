@@ -12,4 +12,4 @@ const arreglo=["Eve",27,"Ale"];
 mostrar(...arreglo);
 
 const arr=["Paco",14,"gmail","BCN"];
-mostrar(...arr);
+mostrar(...arr); 

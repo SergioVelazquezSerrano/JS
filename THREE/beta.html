@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beta</title>
+
+    <script
+    src="https://code.jquery.com/jquery-3.5.0.min.js"
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+    crossorigin="anonymous">
+    </script>
+
+
+<script>
+    $(document).ready(inicio);
+    function inicio(){
+        var listado="";
+        var i=0;
+        $.ajax({
+            url:"antena-satellite.txt",
+            success: function(respuesta){
+                var list = JSON.parse(respuesta);
+
+                for (const key in list) {
+                    if (list.hasOwnProperty(key)) {
+                        const element = list[key];
+                        if(key !== "items"){
+                            //escupe nombre informe
+                            //alert(key + " tiene" +element);
+                            $("#titulo").html("<h1>"+key+" con referencia"+ element+"</h1>");
+
+                        }else{
+                            for (const key in element) {
+                                if (element.hasOwnProperty(key)) {
+                                    const elemento = element[key];
+                                    for (const key in elemento) {
+                                        if (elemento.hasOwnProperty(key)) {
+                                            i++;
+                                            const element0 = elemento[key];
+                                            //escupe el primer valor de estudio
+                                            listado = listado+"<tr><td>"+key+"</td>";
+
+                                            //alert(key);
+                                            listado=bucle(element0, listado);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                   }
+               }
+               $("#marco").html(listado);
+
+            } 
+        });
+    }    
+    function bucle(element,listado) {
+        var com = listado;
+        for (const key in element) {
+
+            if (element.hasOwnProperty(key)) {
+                const elemento = element[key];
+
+                /*
+                if(key==="value"){
+                    listado=listado+"<td>";
+                }
+                */
+                //switch case mejor
+                switch (key) {
+                    case "ref":
+                        listado = listado+"<td> "+elemento;
+
+                        break;
+                    case "type":
+                        listado = listado+"<td> "+elemento;
+
+                        break;
+                    case "value":
+                        listado = listado+"<p>"+elemento+"</p>";
+                    break;
+                    case "required":
+                        listado = listado+"<td> "+elemento;
+                    break;
+                    case "message":
+                        listado = listado+" <td> "+elemento;
+                    break;
+                    case "op":
+                        listado = listado+"<td> "+elemento;
+                    break;
+
+
+                    default:
+                        break;
+                }
+                /*
+                if(com!==listado){
+                    listado=listado+"</td>";
+                }
+                */
+
+
+                /*
+                if(key==="ref" || key==="type" || key==="value"){
+                    //escupe atributos
+                    //alert(key + " tiene" +elemento);
+                    listado = listado+" ---- "+elemento;
+                    //alert(listado);
+                }
+                */
+                if(typeof elemento === 'object'){
+                    listado = listado+"</tr>";
+
+                    listado=bucle(elemento,listado);
+                }
+            }
+        }
+        listado = listado+"</tr>";
+        return listado;
+
+    }
+</script>
+
+</head>
+<body>
+    <div id="titulo"></div>
+    <table  style="border: black 1px solid;">
+        <tr>
+            <th>Titulo</th>
+            <th>Referencia</th>
+            <th>Tipo</th>
+            <th>Valores</th>
+            <th>Requerido</th>
+            <th>Dependencia</th>
+            <th>Valor</th>
+        </tr>
+        <tr id="marco"></tr>
+    </table>
+</body>
+</html>

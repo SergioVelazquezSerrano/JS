@@ -1,0 +1,694 @@
+{"antena-satellite": "12000", "items":[
+  {
+    "antena-exterior-q": {
+      "ref": "12005",
+      "type": "select",
+      "label": "Antena exterior SAT",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "antena-exterior": {
+      "ref": "12010",
+      "type": "radio",
+      "label": "Antena exterior SAT",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Averiada, necesario cambio",
+          "value": "Averiada, necesario cambio"
+        },
+        {
+          "text": "Colocada nueva, comprobada y correcta",
+          "value": "Colocada nueva, comprobada y correcta"
+        },
+        {
+          "text": "Desajustada, se coloca bien y se comprueba su correcto funcionamiento",
+          "value": "Desajustada, se coloca bien y se comprueba su correcto funcionamiento"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        },
+        {
+          "type": "show",
+          "op": "values['antena-exterior-q'] === 'Si'"
+        }
+      ]
+    },
+    "conexionado-recolocado-cableado-q": {
+      "ref": "12015",
+      "type": "select",
+      "label": "Conexionado y recolocado cableado SAT en terrado",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "conexionado-recolocado-cableado": {
+      "ref": "12020",
+      "type": "select",
+      "label": "Conexionado y recolocado cableado SAT en terrado",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        },
+        {
+          "type": "show",
+          "op": "values['conexionado-recolocado-cableado-q'] === 'Si'"
+        }
+      ]
+    },
+    "equipo-centralita-averiada-q": {
+      "ref": "12025",
+      "type": "select",
+      "label": "Equipo o centralita SAT averiada",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "equipo-centralita-averiada": {
+      "ref": "12030",
+      "type": "radio",
+      "label": "Equipo o centralita SAT averiada",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Se sustituye",
+          "value": "Se sustituye"
+        },
+        {
+          "text": "Pendiente de material",
+          "value": "Pendiente de material"
+        },
+        {
+          "text": "Pendiente de presupuesto",
+          "value": "Pendiente de presupuesto"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        },
+        {
+          "type": "show",
+          "op": "values['equipo-centralita-averiada-q'] === 'Si'"
+        }
+      ]
+    },
+    "revisado-ajustado-equipo": {
+      "ref": "12040",
+      "type": "select",
+      "label": "Revisado y ajustado equipo SAT, funcionamiento correcto",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "modulo-averiado-q": {
+      "ref": "12045",
+      "type": "select",
+      "label": "Módulo SAT averiado",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "modulo-averiado": {
+      "ref": "12050",
+      "type": "radio",
+      "label": "Módulo SAT averiado",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Se sustituye",
+          "value": "Se sustituye"
+        },
+        {
+          "text": "Pendiente de material",
+          "value": "Pendiente de material"
+        },
+        {
+          "text": "Pendiente de presupuesto",
+          "value": "Pendiente de presupuesto"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        },
+        {
+          "type": "show",
+          "op": "values['modulo-averiado-q'] === 'Si'"
+        }
+      ]
+    },
+    "revisada-linea-bajante-q": {
+      "ref": "12055",
+      "type": "select",
+      "label": "Revisada línea bajante, fallo localizado y solucionado",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "revisada-linea-bajante": {
+      "ref": "12060",
+      "type": "select",
+      "label": "Revisada línea bajante, fallo localizado y solucionado",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        },
+        {
+          "type": "show",
+          "op": "values['revisada-linea-bajante-q'] === 'Si'"
+        }
+      ]
+    },
+    "fallo": {
+      "ref": "12070",
+      "type": "radio",
+      "label": "Fallo",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Derivador comunitario exterior, se cambia",
+          "value": "Derivador comunitario exterior, se cambia"
+        },
+        {
+          "text": "Toma comunitaria interior, se cambia",
+          "value": "Toma comunitaria interior, se cambia"
+        },
+        {
+          "text": "Bajante, pendiente volver por falta acceso pisos",
+          "value": "Bajante, pendiente volver por falta acceso pisos"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "revision-instalacion-interior-q": {
+      "ref": "12075",
+      "type": "select",
+      "label": "Revisión de instalación interior",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "revision-instalacion-interior": {
+      "ref": "12080",
+      "type": "radio",
+      "label": "Revisión de instalación interior",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Avería solucionada",
+          "value": "Avería solucionada"
+        },
+        {
+          "text": "Se hace presupuesto",
+          "value": "Se hace presupuesto"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        },
+        {
+          "type": "show",
+          "op": "values['revision-instalacion-interior-q'] === 'Si'"
+        }
+      ]
+    },
+    "necesaria-reparacion": {
+      "ref": "12090",
+      "type": "radio",
+      "label": "Necesaria reparación a cargo cliente",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Aceptada y realizada",
+          "value": "Aceptada y realizada"
+        },
+        {
+          "text": "Pendiente de aprobación",
+          "value": "Pendiente de aprobación"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "hacer-presupuesto": {
+      "ref": "12110",
+      "type": "select",
+      "label": "Se hace presupuesto",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "cliente-ausente-q": {
+      "ref": "12115",
+      "type": "select",
+      "label": "Cliente ausente",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "cliente-ausente": {
+      "ref": "12120",
+      "type": "select",
+      "label": "Cliente ausente",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        },
+        {
+          "type": "show",
+          "op": "values['cliente-ausente-q'] === 'Si'"
+        }
+      ]
+    },
+    "pic-antena-header": {
+      "type": "header",
+      "label": "Fotografía Antena SAT"
+    },
+    "pic-antena-q": {
+      "ref": "12125",
+      "type": "select",
+      "label": "Imagen de Antena",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "pic-antena": {
+      "ref": "12130",
+      "type": "file",
+      "label": "Imagen de Antena",
+      "placeholder": "Hacer foto",
+      "rules": [
+        {
+          "required": true,
+          "message": "Campo obligatorio"
+        },
+        {
+          "type": "show",
+          "op": "values['pic-antena-q'] === 'Si'"
+        }
+      ]
+    },
+    "pic-equipo-header": {
+      "type": "header",
+      "label": "Fotografía Equipo SAT"
+    },
+    "pic-equipo-q": {
+      "ref": "12135",
+      "type": "select",
+      "label": "Imagen de Equipo",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "pic-equipo": {
+      "ref": "12140",
+      "type": "file",
+      "label": "Imagen de Equipo",
+      "placeholder": "Hacer foto",
+      "rules": [
+        {
+          "required": true,
+          "message": "Campo obligatorio"
+        },
+        {
+          "type": "show",
+          "op": "values['pic-equipo-q'] === 'Si'"
+        }
+      ]
+    },
+    "pic-reparacion-header": {
+      "type": "header",
+      "label": "Fotografía Reparación"
+    },
+    "pic-reparacion-q": {
+      "ref": "12145",
+      "type": "select",
+      "label": "Imagen de Reparación",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "pic-reparacion": {
+      "ref": "12150",
+      "type": "file",
+      "label": "Imagen de Reparación",
+      "placeholder": "Hacer foto",
+      "rules": [
+        {
+          "required": true,
+          "message": "Campo obligatorio"
+        },
+        {
+          "type": "show",
+          "op": "values['pic-reparacion-q'] === 'Si'"
+        }
+      ]
+    },
+    "material-head": {
+      "type": "header",
+      "label": "Material"
+    },
+    "material-q": {
+      "ref": "12145",
+      "type": "select",
+      "label": "Material instalado",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Sí",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "material": {
+      "ref": "12170",
+      "type": "select",
+      "label": "Material instalado",
+      "placeholder": "Seleccionar opción",
+      "options": [
+        {
+          "text": "Si",
+          "value": "Si"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ],
+      "rules": [
+        {
+          "required": true,
+          "message": "Campo obligatorio"
+        },
+        {
+          "type": "show",
+          "op": "values['material-q'] === 'Si'"
+        }
+      ]
+    },
+    "material-pic": {
+      "ref": "12180",
+      "type": "file",
+      "label": "Imagen del material",
+      "placeholder": "Hacer foto",
+      "rules": [
+        {
+          "required": true,
+          "message": "Campo obligatorio"
+        },
+        {
+          "type": "show",
+          "op": "values['material'] === 'Si'"
+        }
+      ]
+    },
+    "material-ref": {
+      "ref": "12190",
+      "type": "text",
+      "label": "Referencia del material",
+      "placeholder": "Introduce la referencia",
+      "rules": [
+        {
+          "type": "show",
+          "op": "values['material'] === 'Si'"
+        }
+      ]
+    },
+    "material-price": {
+      "ref": "12200",
+      "type": "text",
+      "label": "Precio del material",
+      "placeholder": "Introduce el importe",
+      "rules": [
+        {
+          "type": "show",
+          "op": "values['material'] === 'Si'"
+        }
+      ]
+    },
+    "cliente-head": {
+      "type": "header",
+      "label": "Firma del cliente"
+    },
+    "cliente-firma": {
+      "ref": "12210",
+      "type": "signature",
+      "label": "Validación del cliente",
+      "rules": [
+        {
+          "required": true,
+          "message": "Campo obligatorio"
+        }
+      ]
+    },
+    "observaciones-head": {
+      "type": "header",
+      "label": "Observaciones"
+    },
+    "observaciones": {
+      "ref": "12240",
+      "type": "text",
+      "label": "Observaciones de la revisión",
+      "placeholder": "Deja un comentario de la revisión...",
+      "rules": [
+        {
+          "required": false,
+          "message": "Campo obligatorio"
+        }
+      ]
+    }
+  }
+  ]
+}

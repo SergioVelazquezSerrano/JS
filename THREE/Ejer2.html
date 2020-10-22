@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejer 2 Marzo</title>
+
+    <script
+    src="https://code.jquery.com/jquery-3.5.0.min.js"
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+    crossorigin="anonymous">
+    </script>
+    
+    <script>
+        $(document).ready(inicio);
+        function inicio(){
+                $.ajax({
+                    url:"Museos.txt",
+                    success: function(respuesta){
+                        var list = JSON.parse(respuesta);
+                        for(var i = 0 ; i < list["resources"].length ; i++){ 
+                            var listado;  
+                            listado += "<option value='" + list["resources"][i]["Nombre"] + "'>" + list["resources"][i]["Nombre"] + "</option>";
+                            $("#museos").html(listado);
+                        }    
+                    } 
+                });
+                buscar();
+        }
+        function buscar(){
+            $("#buscar").click(function(){
+                var nom = $(":selected").val();
+                $.ajax({
+                    url:"Museos.txt",
+                    success: function(respuesta){
+                        var list = JSON.parse(respuesta);
+                        for(var i = 0; i < list["resources"].length; i++){
+                            if(nom == list["resources"][i]["Nombre"]){
+                                var obj= $("#info").text( "Nombre: " + list["resources"][i]["Nombre"] +'\n'
+                            + "Direccion: " + list["resources"][i]["Direccion"] + '\n'
+                            + "Descripcion Corta: " +list["resources"][i]["DescripcionCorta"] +'\n'
+                            +"Descripcion UK " +list["resources"][i]["DescripcionCortaUK"]);
+                            obj.html(obj.html().replace(/\n/g,'<br/>'));
+                            $("#im").attr("src",list["resources"][i]["imagenURL"]);
+                            }     
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    
+        <label for="museos">Elige un museo:</label>
+        <select name="museos" id="museos">
+        </select>
+        <button id="buscar">Buscar</button>
+    
+    <p id="info"></p>
+    <img id="im"></img>
+
+
+</body>
+</html>

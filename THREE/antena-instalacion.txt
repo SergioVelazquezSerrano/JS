@@ -1,0 +1,629 @@
+{"antena-instalacion": "30000", "items":[
+{
+  "antena": {
+    "ref": "30010",
+    "type": "select",
+    "label": "Instalación de antena",
+    "placeholder": "Seleccionar opción",
+    "options": [
+      {
+        "text": "Sí",
+        "value": "Si"
+      },
+      {
+        "text": "No",
+        "value": "No"
+      }
+    ],
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      }
+    ]
+  },
+  "antena-pic": {
+    "ref": "30020",
+    "type": "file",
+    "label": "Imagen de la antena",
+    "placeholder": "Hacer foto",
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      },
+      {
+        "type": "show",
+        "op": "values['antena'] === 'Si'"
+      }
+    ]
+  },
+  "equipo": {
+    "ref": "30030",
+    "type": "select",
+    "label": "Instalación de equipo",
+    "placeholder": "Seleccionar opción",
+    "options": [
+      {
+        "text": "Sí",
+        "value": "Si"
+      },
+      {
+        "text": "No",
+        "value": "No"
+      }
+    ],
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      }
+    ]
+  },
+  "equipo-pic": {
+    "ref": "30040",
+    "type": "file",
+    "label": "Imagen de la antena",
+    "placeholder": "Hacer foto",
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      },
+      {
+        "type": "show",
+        "op": "values['equipo'] === 'Si'"
+      }
+    ]
+  },
+  "equipo-nivel": {
+    "ref": "30050",
+    "type": "select",
+    "label": "Nivel de salida",
+    "placeholder": "Seleccionar opción",
+    "options": [
+      {
+        "text": "50 Dbs",
+        "value": "50 Dbs"
+      },
+      {
+        "text": "60 Dbs",
+        "value": "60 Dbs"
+      },
+      {
+        "text": "70 Dbs",
+        "value": "70 Dbs"
+      },
+      {
+        "text": "80 Dbs",
+        "value": "80 Dbs"
+      },
+      {
+        "text": "90 Dbs",
+        "value": "90 Dbs"
+      },
+      {
+        "text": "100 Dbs",
+        "value": "100 Dbs"
+      },
+      {
+        "text": "110 Dbs",
+        "value": "110 Dbs"
+      },
+      {
+        "text": "120 Dbs",
+        "value": "120 Dbs"
+      }
+    ],
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      },
+      {
+        "type": "show",
+        "op": "values['equipo'] === 'Si'"
+      }
+    ]
+  },
+  "antena-sat": {
+    "ref": "30060",
+    "type": "select",
+    "label": "Instalación de antena satélite",
+    "placeholder": "Seleccionar opción",
+    "options": [
+      {
+        "text": "Sí",
+        "value": "Si"
+      },
+      {
+        "text": "No",
+        "value": "No"
+      }
+    ],
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      }
+    ]
+  },
+  "antena-sat-pic": {
+    "ref": "30070",
+    "type": "file",
+    "label": "Imagen de la antena satélite",
+    "placeholder": "Hacer foto",
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      },
+      {
+        "type": "show",
+        "op": "values['antena-sat'] === 'Si'"
+      }
+    ]
+  },
+  "equipo-sat": {
+    "ref": "30080",
+    "type": "select",
+    "label": "Instalación de equipo satélite",
+    "placeholder": "Seleccionar opción",
+    "options": [
+      {
+        "text": "Sí",
+        "value": "Si"
+      },
+      {
+        "text": "No",
+        "value": "No"
+      }
+    ],
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      }
+    ]
+  },
+  "equipo-sat-pic": {
+    "ref": "30090",
+    "type": "file",
+    "label": "Imagen de la antena satélite",
+    "placeholder": "Hacer foto",
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      },
+      {
+        "type": "show",
+        "op": "values['equipo-sat'] === 'Si'"
+      }
+    ]
+  },
+  "terrado": {
+    "ref": "30100",
+    "type": "select",
+    "label": "Instalación de terrado",
+    "placeholder": "Seleccionar opción",
+    "options": [
+      {
+        "text": "Sí",
+        "value": "Si"
+      },
+      {
+        "text": "No",
+        "value": "No"
+      }
+    ],
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      }
+    ]
+  },
+  "terrado-pic": {
+    "ref": "30110",
+    "type": "file",
+    "label": "Imagen de terrado",
+    "placeholder": "Hacer foto",
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      },
+      {
+        "type": "show",
+        "op": "values['terrado'] === 'Si'"
+      }
+    ]
+  },
+  "terrado-1-pic": {
+    "ref": "30111",
+    "type": "file",
+    "label": "Imagen de terrado",
+    "placeholder": "Hacer foto",
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      },
+      {
+        "type": "show",
+        "op": "values['terrado'] === 'Si'"
+      }
+    ]
+  },
+  "terrado-2-pic": {
+    "ref": "30112",
+    "type": "file",
+    "label": "Imagen de terrado",
+    "placeholder": "Hacer foto",
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      },
+      {
+        "type": "show",
+        "op": "values['terrado'] === 'Si'"
+      }
+    ]
+  },
+  "terrado-3-pic": {
+    "ref": "30113",
+    "type": "file",
+    "label": "Imagen de terrado",
+    "placeholder": "Hacer foto",
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      },
+      {
+        "type": "show",
+        "op": "values['terrado'] === 'Si'"
+      }
+    ]
+  },
+  "bajantes": {
+    "ref": "30120",
+    "type": "select",
+    "label": "Instalación de bajantes",
+    "placeholder": "Seleccionar opción",
+    "options": [
+      {
+        "text": "Sí",
+        "value": "Si"
+      },
+      {
+        "text": "No",
+        "value": "No"
+      }
+    ],
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      }
+    ]
+  },
+  "bajantes-cajas": {
+    "ref": "30130",
+    "type": "schema",
+    "label": "Bajantes de la instalación",
+    "placeholder": "Añadir bajantes",
+    "schema": {
+      "cajas-num": {
+        "ref": "30131",
+        "type": "number",
+        "label": "Número de cajas",
+        "placeholder": "Escribir cantidad",
+        "rules": [
+          {
+            "required": true,
+            "message": "Campo obligatorio"
+          }
+        ]
+      },
+      "sub-pic-camara": {
+        "ref": "30132",
+        "type": "text",
+        "label": "Puerta y ubicación",
+        "placeholder": "Escribe la localización",
+        "rules": [
+          {
+            "required": true,
+            "message": "Campo obligatorio"
+          }
+        ]
+      }
+    },
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      },
+      {
+        "type": "number",
+        "min": 1,
+        "max": 10
+      },
+      {
+        "type": "show",
+        "op": "values['bajantes'] === 'Si'"
+      }
+    ]
+  },
+  "retirada": {
+    "ref": "30140",
+    "type": "select",
+    "label": "Retirada de antenas en terrado",
+    "placeholder": "Seleccionar opción",
+    "options": [
+      {
+        "text": "Sí",
+        "value": "Si"
+      },
+      {
+        "text": "No",
+        "value": "No"
+      }
+    ],
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      }
+    ]
+  },
+  "retirada-tdt": {
+    "ref": "30150",
+    "type": "number",
+    "label": "Número de antenas TDT a retirar",
+    "placeholder": "Escribir cantidad",
+    "rules": [
+      {
+        "required": false,
+        "message": "Campo obligatorio"
+      },
+      {
+        "type": "number",
+        "min": 1,
+        "max": 50
+      },
+      {
+        "type": "show",
+        "op": "values['retirada'] === 'Si'"
+      }
+    ]
+  },
+  "retirada-sat": {
+    "ref": "30160",
+    "type": "number",
+    "label": "Número de antenas satélite a retirar",
+    "placeholder": "Escribir cantidad",
+    "rules": [
+      {
+        "required": false,
+        "message": "Campo obligatorio"
+      },
+      {
+        "type": "number",
+        "min": 1,
+        "max": 50
+      },
+      {
+        "type": "show",
+        "op": "values['retirada'] === 'Si'"
+      }
+    ]
+  },
+  "pisos-pendientes": {
+    "ref": "30170",
+    "type": "select",
+    "label": "Instalación de bajantes",
+    "placeholder": "Seleccionar opción",
+    "options": [
+      {
+        "text": "Sí",
+        "value": "Si"
+      },
+      {
+        "text": "No",
+        "value": "No"
+      }
+    ],
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      }
+    ]
+  },
+  "pisos-pendientes-items": {
+    "ref": "30180",
+    "type": "schema",
+    "label": "Pisos pendientes de instalar",
+    "placeholder": "Añadir pisos",
+    "schema": {
+      "piso-puerta": {
+        "ref": "30131",
+        "type": "text",
+        "label": "Piso / Puerta",
+        "placeholder": "Escribir piso",
+        "rules": [
+          {
+            "required": true,
+            "message": "Campo obligatorio"
+          }
+        ]
+      },
+      "piso-perdida": {
+        "ref": "30170",
+        "type": "select",
+        "label": "Perdida caja",
+        "placeholder": "Seleccionar opción",
+        "options": [
+          {
+            "text": "225",
+            "value": "225"
+          },
+          {
+            "text": "220",
+            "value": "220"
+          },
+          {
+            "text": "216",
+            "value": "216"
+          },
+          {
+            "text": "211",
+            "value": "211"
+          },
+          {
+            "text": "204",
+            "value": "204"
+          }
+        ],
+        "rules": [
+          {
+            "required": true,
+            "message": "Campo obligatorio"
+          }
+        ]
+      }
+    },
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      },
+      {
+        "type": "show",
+        "op": "values['pisos-pendientes'] === 'Si'"
+      }
+    ]
+  },
+  "pisos-no": {
+    "ref": "30190",
+    "type": "select",
+    "label": "Pisos sin oider instalar la bajante",
+    "placeholder": "Seleccionar opción",
+    "options": [
+      {
+        "text": "Sí",
+        "value": "Si"
+      },
+      {
+        "text": "No",
+        "value": "No"
+      }
+    ],
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      }
+    ]
+  },
+  "pisos-no-items": {
+    "ref": "30200",
+    "type": "schema",
+    "label": "Pisos pendientes de instalar la nueva bajante",
+    "placeholder": "Necesaria instalación interior",
+    "schema": {
+      "piso-puerta": {
+        "ref": "30201",
+        "type": "text",
+        "label": "Piso / Puerta",
+        "placeholder": "Escribir piso",
+        "rules": [
+          {
+            "required": true,
+            "message": "Campo obligatorio"
+          }
+        ]
+      },
+      "piso-metros": {
+        "ref": "30202",
+        "type": "number",
+        "label": "Número de metros de cable",
+        "placeholder": "Escribir cantidad",
+        "rules": [
+          {
+            "required": true,
+            "message": "Campo obligatorio"
+          },
+          {
+            "type": "number",
+            "min": 1,
+            "max": 100
+          }
+        ]
+      },
+      "piso-cajas": {
+        "ref": "30203",
+        "type": "number",
+        "label": "Número de cajas de toma",
+        "placeholder": "Escribir cantidad",
+        "rules": [
+          {
+            "required": false,
+            "message": "Campo obligatorio"
+          },
+          {
+            "type": "number",
+            "min": 0,
+            "max": 10
+          }
+        ]
+      }
+    },
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      },
+      {
+        "type": "show",
+        "op": "values['pisos-no'] === 'Si'"
+      }
+    ]
+  },
+  "cliente-head": {
+    "type": "header",
+    "label": "Firma del cliente"
+  },
+  "cliente-firma": {
+    "ref": "30210",
+    "type": "signature",
+    "label": "Validación del cliente",
+    "rules": [
+      {
+        "required": true,
+        "message": "Campo obligatorio"
+      }
+    ]
+  },
+  "observaciones-head": {
+    "type": "header",
+    "label": "Observaciones"
+  },
+  "observaciones": {
+    "ref": "30220",
+    "type": "text",
+    "label": "Observaciones de la revisión",
+    "placeholder": "Deja un comentario de la revisión...",
+    "rules": [
+      {
+        "required": false,
+        "message": "Campo obligatorio"
+      }
+    ]
+  }
+}
+]
+}

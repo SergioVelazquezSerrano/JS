@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beta</title>
+
+    <script
+    src="https://code.jquery.com/jquery-3.5.0.min.js"
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+    crossorigin="anonymous">
+    </script>
+<style>
+    tr, td {
+    border: black 1px solid;
+    }
+</style >
+
+<script>
+    $(document).ready(inicio);
+    function inicio(){
+        var listado="";
+        $.ajax({
+            url:"antena-satellite.txt",
+            success: function(respuesta){
+                var list = JSON.parse(respuesta);
+
+                for (const key in list) {
+                    if (list.hasOwnProperty(key)) {
+                        const element = list[key];
+                        if(key !== "items"){
+                            $("#titulo").html("<h1>"+key+" con referencia"+ element+"</h1>");
+                        }else{
+                            for (const key in element) {
+                                if (element.hasOwnProperty(key)) {
+                                    const elemento = element[key];
+                                    for (const key in elemento) {
+                                        if (elemento.hasOwnProperty(key)) {
+                                            const element0 = elemento[key];
+                                            //escupe el primer valor de estudio
+                                            listado = listado+"<tr><td>"+key+"</td>";
+                                            listado=bucle(element0, listado);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                   }
+               }
+               $("#marco").html(listado);
+
+            } 
+        });
+    
+    function bucle(element,listado) {
+        var com = listado;
+        for (const key in element) {
+            if (element.hasOwnProperty(key)) {
+                const elemento = element[key];
+                switch (key) {
+                    case "ref":
+                        listado = listado+"<td> "+elemento;
+
+                        break;
+                    case "type":
+                        listado = listado+"<td> "+elemento;
+
+                        break;
+                    case "options":
+                    //bucle2
+                        listado = listado+"<td>";
+                        listado=bucle2(elemento,listado);
+                    break;
+                    case "rules":
+                    //bucle2
+                        listado = listado+"<td>";
+                        listado=bucle2(elemento,listado);
+                    break;
+
+                    default:
+                        break;
+                }
+                    
+            }
+        }
+        listado = listado+"</tr>";
+        return listado;
+
+    }
+    function bucle2(element,listado) {
+        for (const key in element) {
+            if (element.hasOwnProperty(key)) {
+                const elemento = element[key];
+                for (const key in elemento) {
+                    if (elemento.hasOwnProperty(key)) {
+                        const element0 = elemento[key];
+                        switch (key) {
+                            case "value":
+                                listado = listado+"<p> "+element0+"</p>";
+                            break;
+                            case "required":
+                                listado = listado+"<p>"+element0+"</p>";
+                            break;
+                            case "type":
+                                listado = listado+"<td>"+element0+"</td>";
+                            break;
+                            case "op":
+                                listado = listado+"<td>"+element0+"</td>";
+                            break;
+                            default:
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        listado = listado+"</td>";
+        return listado;  
+    }  
+}
+</script>
+
+</head>
+<body>
+    <div id="titulo"></div>
+    <table  style="border: black 1px solid;">
+        <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Referencia</th>
+            <th>Tipo</th>
+            <th>Valores</th>
+            <th>Requerido</th>
+            <th>Dependencia</th>
+            <th>Valor</th>
+        </tr>
+        </thead>
+        <tbody id="marco"></tbody>
+    </table>
+</body>
+</html>

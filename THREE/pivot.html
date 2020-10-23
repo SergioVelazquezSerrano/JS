@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>three.js webgl - rotate object around point</title>
+    <meta charset="utf-8">
+    <style>
+    body {
+        background-color: #ffffff;
+        margin: 0;
+        overflow: hidden;
+    }
+    </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js" integrity="sha512-yNJzAsg5JyP91u+sLHlUDULMBd3hmEiVkYeeN1cQBKaLZ7EyT6oH2u5THNIRM2Fu6VKcZJv+F/QAp1h/qzy9Ow==" crossorigin="anonymous"></script>
+    <script>
+        THREE.CSS3DObject = function ( element ) {
+
+	THREE.Object3D.call( this );
+
+	this.element = element || document.createElement( 'div' );
+	this.element.style.position = 'absolute';
+	this.element.style.pointerEvents = 'auto';
+
+	this.addEventListener( 'removed', function () {
+
+		this.traverse( function ( object ) {
+
+			if ( object.element instanceof Element && object.element.parentNode !== null ) {
+
+				object.element.parentNode.removeChild( object.element );
+
+			}
+
+		} );
+
+	} );
+
+};
+
+THREE.CSS3DObject.prototype = Object.assign( Object.create( THREE.Object3D.prototype ), {
+
+	constructor: THREE.CSS3DObject,
+
+	copy: function ( source, recursive ) {
+
+		THREE.Object3D.prototype.copy.call( this, source, recursive );
+
+		this.element = source.element.cloneNode( true );
+
+		return this;
+
+	}
+
+} );
+
+THREE.CSS3DSprite = function ( element ) {
+
+	THREE.CSS3DObject.call( this, element );
+
+};
+
+THREE.CSS3DSprite.prototype = Object.create( THREE.CSS3DObject.prototype );
+THREE.CSS3DSprite.prototype.constructor = THREE.CSS3DSprite;
+
+//
+
+THREE.CSS3DRenderer = function () {
+
+	var _this = this;
+
+	var _width, _height;
+	var _widthHalf, _heightHalf;
+
+	var matrix = new THREE.Matrix4();
+
+	var cache = {
+		camera: { fov: 0, style: '' },
+		objects: new WeakMap()
+	};
+
+	var domElement = document.createElement( 'div' );
+	domElement.style.overflow = 'hidden';
+
+	this.domElement = domElement;
+
+	var cameraElement = document.createElement( 'div' );
+
+	cameraElement.style.WebkitTransformStyle = 'preserve-3d';
+	cameraElement.style.transformStyle = 'preserve-3d';
+	cameraElement.style.pointerEvents = 'none';
+
+	domElement.appendChild( cameraElement );
+
+	var isIE = /Trident/i.test( navigator.userAgent );
+
+	this.getSize = function () {
+
+		return {
+			width: _width,
+			height: _height
+		};
+
+	};
+
+	this.setSize = function ( width, height ) {
+
+		_width = width;
+		_height = height;
+		_widthHalf = _width / 2;
+		_heightHalf = _height / 2;
+
+		domElement.style.width = width + 'px';
+		domElement.style.height = height + 'px';
+
+		cameraElement.style.width = width + 'px';
+		cameraElement.style.height = height + 'px';
+
+	};
+
+	function epsilon( value ) {
+
+		return Math.abs( value ) < 1e-10 ? 0 : value;
+
+	}
+
+	function getCameraCSSMatrix( matrix ) {
+
+		var elements = matrix.elements;
+
+		return 'matrix3d(' +
+			epsilon( elements[ 0 ] ) + ',' +
+			epsilon( - elements[ 1 ] ) + ',' +
+			epsilon( elements[ 2 ] ) + ',' +
+			epsilon( elements[ 3 ] ) + ',' +
+			epsilon( elements[ 4 ] ) + ',' +
+			epsilon( - elements[ 5 ] ) + ',' +
+			epsilon( elements[ 6 ] ) + ',' +
+			epsilon( elements[ 7 ] ) + ',' +
+			epsilon( elements[ 8 ] ) + ',' +
+			epsilon( - elements[ 9 ] ) + ',' +
+			epsilon( elements[ 10 ] ) + ',' +
+			epsilon( elements[ 11 ] ) + ',' +
+			epsilon( elements[ 12 ] ) + ',' +
+			epsilon( - elements[ 13 ] ) + ',' +
+			epsilon( elements[ 14 ] ) + ',' +
+			epsilon( elements[ 15 ] ) +
+		')';
+
+	}
+
+	function getObjectCSSMatrix( matrix, cameraCSSMatrix ) {
+
+		var elements = matrix.elements;
+		var matrix3d = 'matrix3d(' +
+			epsilon( elements[ 0 ] ) + ',' +
+			epsilon( elements[ 1 ] ) + ',' +
+			epsilon( elements[ 2 ] ) + ',' +
+			epsilon( elements[ 3 ] ) + ',' +
+			epsilon( - elements[ 4 ] ) + ',' +
+			epsilon( - elements[ 5 ] ) + ',' +
+			epsilon( - elements[ 6 ] ) + ',' +
+			epsilon( - elements[ 7 ] ) + ',' +
+			epsilon( elements[ 8 ] ) + ',' +
+			epsilon( elements[ 9 ] ) + ',' +
+			epsilon( elements[ 10 ] ) + ',' +
+			epsilon( elements[ 11 ] ) + ',' +
+			epsilon( elements[ 12 ] ) + ',' +
+			epsilon( elements[ 13 ] ) + ',' +
+			epsilon( elements[ 14 ] ) + ',' +
+			epsilon( elements[ 15 ] ) +
+		')';
+
+		if ( isIE ) {
+
+			return 'translate(-50%,-50%)' +
+				'translate(' + _widthHalf + 'px,' + _heightHalf + 'px)' +
+				cameraCSSMatrix +
+				matrix3d;
+
+		}
+
+		return 'translate(-50%,-50%)' + matrix3d;
+
+	}
+
+	function renderObject( object, scene, camera, cameraCSSMatrix ) {
+
+		if ( object instanceof THREE.CSS3DObject ) {
+
+			object.onBeforeRender( _this, scene, camera );
+
+			var style;
+
+			if ( object instanceof THREE.CSS3DSprite ) {
+
+				// http://swiftcoder.wordpress.com/2008/11/25/constructing-a-billboard-matrix/
+
+				matrix.copy( camera.matrixWorldInverse );
+				matrix.transpose();
+				matrix.copyPosition( object.matrixWorld );
+				matrix.scale( object.scale );
+
+				matrix.elements[ 3 ] = 0;
+				matrix.elements[ 7 ] = 0;
+				matrix.elements[ 11 ] = 0;
+				matrix.elements[ 15 ] = 1;
+
+				style = getObjectCSSMatrix( matrix, cameraCSSMatrix );
+
+			} else {
+
+				style = getObjectCSSMatrix( object.matrixWorld, cameraCSSMatrix );
+
+			}
+
+			var element = object.element;
+			var cachedObject = cache.objects.get( object );
+
+			if ( cachedObject === undefined || cachedObject.style !== style ) {
+
+				element.style.WebkitTransform = style;
+				element.style.transform = style;
+
+				var objectData = { style: style };
+
+				if ( isIE ) {
+
+					objectData.distanceToCameraSquared = getDistanceToSquared( camera, object );
+
+				}
+
+				cache.objects.set( object, objectData );
+
+			}
+
+			element.style.display = object.visible ? '' : 'none';
+
+			if ( element.parentNode !== cameraElement ) {
+
+				cameraElement.appendChild( element );
+
+			}
+
+			object.onAfterRender( _this, scene, camera );
+
+		}
+
+		for ( var i = 0, l = object.children.length; i < l; i ++ ) {
+
+			renderObject( object.children[ i ], scene, camera, cameraCSSMatrix );
+
+		}
+
+	}
+
+	var getDistanceToSquared = function () {
+
+		var a = new THREE.Vector3();
+		var b = new THREE.Vector3();
+
+		return function ( object1, object2 ) {
+
+			a.setFromMatrixPosition( object1.matrixWorld );
+			b.setFromMatrixPosition( object2.matrixWorld );
+
+			return a.distanceToSquared( b );
+
+		};
+
+	}();
+
+	function filterAndFlatten( scene ) {
+
+		var result = [];
+
+		scene.traverse( function ( object ) {
+
+			if ( object instanceof THREE.CSS3DObject ) result.push( object );
+
+		} );
+
+		return result;
+
+	}
+
+	function zOrder( scene ) {
+
+		var sorted = filterAndFlatten( scene ).sort( function ( a, b ) {
+
+			var distanceA = cache.objects.get( a ).distanceToCameraSquared;
+			var distanceB = cache.objects.get( b ).distanceToCameraSquared;
+
+			return distanceA - distanceB;
+
+		} );
+
+		var zMax = sorted.length;
+
+		for ( var i = 0, l = sorted.length; i < l; i ++ ) {
+
+			sorted[ i ].element.style.zIndex = zMax - i;
+
+		}
+
+	}
+
+	this.render = function ( scene, camera ) {
+
+		var fov = camera.projectionMatrix.elements[ 5 ] * _heightHalf;
+
+		if ( cache.camera.fov !== fov ) {
+
+			if ( camera.isPerspectiveCamera ) {
+
+				domElement.style.WebkitPerspective = fov + 'px';
+				domElement.style.perspective = fov + 'px';
+
+			} else {
+
+				domElement.style.WebkitPerspective = '';
+				domElement.style.perspective = '';
+
+			}
+
+			cache.camera.fov = fov;
+
+		}
+
+		if ( scene.autoUpdate === true ) scene.updateMatrixWorld();
+		if ( camera.parent === null ) camera.updateMatrixWorld();
+
+		if ( camera.isOrthographicCamera ) {
+
+			var tx = - ( camera.right + camera.left ) / 2;
+			var ty = ( camera.top + camera.bottom ) / 2;
+
+		}
+
+		var cameraCSSMatrix = camera.isOrthographicCamera ?
+			'scale(' + fov + ')' + 'translate(' + epsilon( tx ) + 'px,' + epsilon( ty ) + 'px)' + getCameraCSSMatrix( camera.matrixWorldInverse ) :
+			'translateZ(' + fov + 'px)' + getCameraCSSMatrix( camera.matrixWorldInverse );
+
+		var style = cameraCSSMatrix +
+			'translate(' + _widthHalf + 'px,' + _heightHalf + 'px)';
+
+		if ( cache.camera.style !== style && ! isIE ) {
+
+			cameraElement.style.WebkitTransform = style;
+			cameraElement.style.transform = style;
+
+			cache.camera.style = style;
+
+		}
+
+		renderObject( scene, scene, camera, cameraCSSMatrix );
+
+		if ( isIE ) {
+
+			// IE10 and 11 does not support 'preserve-3d'.
+			// Thus, z-order in 3D will not work.
+			// We have to calc z-order manually and set CSS z-index for IE.
+			// FYI: z-index can't handle object intersection
+			zOrder( scene );
+
+		}
+
+	};
+
+};
+    var camera, scene, renderer;
+    var geometry, material, mesh, ref, pivotPoint;
+    var clock;
+
+        function init() {
+            renderer = new THREE.WebGLRenderer();
+            renderer.setClearColor(0xffffff,1);
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            document.body.appendChild( renderer.domElement );
+
+            scene = new THREE.Scene();
+
+            geometry = new THREE.SphereGeometry( 0.5, 20, 20 );
+            material = new THREE.MeshPhongMaterial({ color: 0xff9800});
+            ref = new THREE.Mesh( geometry, material );
+            ref.position.set(0,0,0);
+            scene.add( ref );
+
+            pivotPoint = new THREE.Object3D();
+            pivotPoint.position.set(0,0,0);
+            scene.add( pivotPoint );
+            
+            geometry = new THREE.CubeGeometry( 0.5, 0.5, 0.5 );
+            material = new THREE.MeshPhongMaterial({ color: 0x0000ff});
+            mesh = new THREE.Mesh( geometry, material );
+            pivotPoint.add(mesh);
+            mesh.position.set(0,2,0)
+            
+            camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 100 );
+            camera.position.set (0,0,-4);
+            camera.lookAt(pivotPoint.position);
+            
+            var ambient = new THREE.AmbientLight(0xffffff,0.3);
+            scene.add(ambient);
+            var light = new THREE.DirectionalLight(0xffffff, 1, 100, 2 );
+            light.position.set(10, 20 , 15); 
+            light.castShadow = true;
+            scene.add(light);
+
+            clock = new THREE.Clock();
+            window.addEventListener( 'resize', onWindowResize, false );
+
+        }
+
+        var dir=1;
+        function animate() {
+            requestAnimationFrame( animate );
+            
+            var delta =  clock.getDelta();
+
+            pivotPoint.rotation.z += delta * 2;
+            
+            renderer.render( scene, camera );
+        }
+        
+        function onWindowResize() {
+
+                windowHalfX = window.innerWidth / 2;
+                windowHalfY = window.innerHeight / 2;
+
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+
+                renderer.setSize( window.innerWidth, window.innerHeight );
+
+        }
+        
+        window.addEventListener("DOMContentLoaded", function(event) {
+            init();
+            animate();
+        });
+        
+    </script>
+</head>
+<body>  
+</body>
+</html>
